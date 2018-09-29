@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '../components/HelloWorld'
+import API from '../components/API.vue'
 
 Vue.use(Router)
 
@@ -14,6 +15,11 @@ export function createRouter () {
         path: '/',
         name: 'HelloWorld',
         component: HelloWorld
+      },
+      {
+        path: '/api',
+        name: 'api',
+        component: API
       }
     ]
   })

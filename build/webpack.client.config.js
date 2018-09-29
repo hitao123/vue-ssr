@@ -1,8 +1,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const base = require('./webpack.base.conf')
+const base = require('./webpack.base.config')
 // const SWPrecachePlugin = require('sw-precache-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -13,25 +12,6 @@ const config = merge(base, {
     app: './src/entry-client.js'
   },
   resolve: {
-  },
-  module: {
-    rules: [
-      {
-        test: /\.scss?$/,
-        use: isProd
-          ? ExtractTextPlugin.extract({
-              use: [
-                {
-                  loader: 'css-loader',
-                  options: { minimize: true }
-                },
-                'sass-loader'
-              ],
-              fallback: 'vue-style-loader'
-            })
-          : ['vue-style-loader', 'css-loader', 'sass-loader']
-      },
-    ]
   },
   plugins: [
     // strip dev-only code in Vue source
@@ -90,13 +70,6 @@ if (process.env.NODE_ENV === 'production') {
     //   ]
     // })
     // new VueLoaderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new ExtractTextPlugin({
-      filename: 'common.[chunkhash].css'
-    })
   )
 }
 

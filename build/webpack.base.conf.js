@@ -36,7 +36,6 @@ module.exports = {
     }
   },
   module: {
-    noParse: /es6-promise\.js$/,
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
