@@ -3,6 +3,7 @@ const path = require('path')
 const LRU = require('lru-cache')
 const express = require('express')
 const favicon = require('serve-favicon')
+const cookieParser = require('cookie-parser');
 const compression = require('compression')
 const microcache = require('route-cache')
 const resolve = file => path.resolve(__dirname, file)
@@ -64,6 +65,7 @@ const serve = (path, cache) => express.static(resolve(path), {
 })
 
 app.use(compression({ threshold: 0 }))
+app.use(cookieParser())
 app.use(favicon('./public/favicon.png'))
 app.use('/dist', serve('./dist', true))
 app.use('/public', serve('./public', true))
@@ -98,7 +100,7 @@ function render (req, res) {
   }
 
   const context = {
-    title: 'Vue HN 2.0', // default title
+    title: 'Vue SSR', // default title
     url: req.url
   }
   renderer.renderToString(context, (err, html) => {

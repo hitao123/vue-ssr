@@ -13,13 +13,17 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(['list'])
+    ...mapGetters('hello', ['list'])
   },
-  asyncData ({ store, route }) {
-    return store.dispatch('getTopic', { })
+  asyncData ({ store, route, cookies }) {
+    // config.cookies = cookies
+    return store.dispatch('hello/getTopic', { })
   },
+  // mounted() {
+  //   this.getTopic({})
+  // },
   methods: {
-    ...mapActions(['getTopic'])
+    ...mapActions('hello', ['getTopic'])
   }
 }
 </script>

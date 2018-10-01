@@ -1,6 +1,10 @@
 import axios from 'axios'
 import { GET_TOPICLIST } from '../mutation-types'
 
+// const state = () => ({
+//   list: []
+// })
+
 const state = {
   list: []
 }
@@ -11,6 +15,12 @@ const getters = {
 
 const actions = {
   getTopic ({ commit }, params) {
+    // let cookies
+    // if (params.cookies) {
+    //   cookies = params.cookies
+    //   delete params.cookies
+    // }
+
     axios.get('https://cnodejs.org/api/v1/topics')
       .then(function (res) {
         let data = res.data
@@ -32,6 +42,7 @@ const mutations = {
 }
 
 export default {
+  namespaced: true,
   getters,
   state,
   actions,
