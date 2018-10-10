@@ -101,7 +101,8 @@ function render (req, res) {
 
   const context = {
     title: 'Vue SSR', // default title
-    url: req.url
+    url: req.url,
+    cookies: req.cookies
   }
   renderer.renderToString(context, (err, html) => {
     if (err) {

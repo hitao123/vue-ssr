@@ -1,4 +1,5 @@
-import axios from 'axios'
+// import axios from 'axios'
+import { fetchAPI } from '../../utils/http-server'
 import { GET_TOPICLIST } from '../mutation-types'
 
 // const state = () => ({
@@ -15,17 +16,14 @@ const getters = {
 
 const actions = {
   getTopic ({ commit }, params) {
-    // let cookies
-    // if (params.cookies) {
-    //   cookies = params.cookies
-    //   delete params.cookies
-    // }
+    if (!params.cookies) {
+      params.cookies = {}
+    }
 
-    axios.get('https://cnodejs.org/api/v1/topics')
+    fetchAPI(params.cookies).get('https://cnodejs.org/api/v1/topics', {})
       .then(function (res) {
-        let data = res.data
-        if (data.success === true) {
-          commit(GET_TOPICLIST, data.data)
+        if (res.success === true) {
+          commit(GET_TOPICLIST, res.data)
         }
       })
       .catch(function (error) {

@@ -16,8 +16,9 @@ export default {
     ...mapGetters('hello', ['list'])
   },
   asyncData ({ store, route, cookies }) {
-    // config.cookies = cookies
-    return store.dispatch('hello/getTopic', { })
+    let config = {}
+    config.cookies = cookies
+    return store.dispatch('hello/getTopic', config)
   },
   // mounted() {
   //   this.getTopic({})
